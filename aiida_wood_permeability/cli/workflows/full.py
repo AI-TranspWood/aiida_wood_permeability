@@ -18,9 +18,6 @@ from ..utils import launch, options
 # Codes
 @options.WOOD_MS_CODE(required=True)
 @options.PERMEABILITY_CODE(required=True)
-# Either/or params
-@options.WOOD_STRUCTURE_FILE(required=False)
-@options.WOOD_STRUCT_NODE(required=False)
 # Optional parameters,
 @options.ARRAY_NAME(required=False)
 @options.SCALING_FACTOR()
@@ -46,7 +43,6 @@ def launch_workflow(
     # Codes
     wood_ms_code,
     permeability_code,
-    clean_workdir,
     # Resources
     num_nodes,
     num_mpiprocs_per_machine,
@@ -59,6 +55,7 @@ def launch_workflow(
     # inlet_pressure, tau,
     # kinematic_viscosity, fluid_density,
     # tolerance, uniform_guo_zhao,
+    clean_workdir,
     **optional
 ):
     """Generation to permeability workflow for wood structures."""
