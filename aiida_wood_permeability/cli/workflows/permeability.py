@@ -58,7 +58,7 @@ def launch_workflow(
     # tolerance, uniform_guo_zhao,
     **optional
 ):
-    """Launch the infiltration workflow."""
+    """Permeability workflow for wood structures."""
     from aiida.plugins import WorkflowFactory
 
     workchain = WorkflowFactory('aitw.wood_permeability.olb_permeability')

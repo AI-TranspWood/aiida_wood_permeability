@@ -41,7 +41,7 @@ def launch_workflow(
     # with_mpi,
     daemon
 ):
-    """Launch the infiltration workflow."""
+    """Apply a structure filter to a wood structure to prepare it for permeability calculations."""
     from aiida.plugins import WorkflowFactory
 
     workchain = WorkflowFactory('aitw.wood_permeability.structure_filter')
