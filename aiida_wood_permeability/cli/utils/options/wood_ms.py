@@ -1,38 +1,9 @@
 # -*- coding: utf-8 -*-
 """Pre-defined overridable options for commonly used command line interface parameters."""
-from typing import Callable
-
 from aiida.cmdline.params import types
 from aiida.cmdline.params.options import OverridableOption
 import click
 
-##################################################################################################################
-# Options for WOOD_MS specific calculations
-
-_WOOD_MS_OPTIONS = []
-
-# def extract_options_wood_ms(**kwargs) -> dict:
-#     """Extract the options passed to a CLI command"""
-#     options = {}
-#     for option in _WOOD_MS_OPTIONS:
-#         option_name = option.name or option.opts[0].lstrip('-').replace('-', '_')
-#         if option_name in kwargs:
-#             options[option_name] = kwargs[option_name]
-#     return options
-
-# def apply_options_wood_ms(func: Callable, overrides: dict = None) -> Callable:
-#     """Apply the WOOD_MS_OPTIONS to a CLI command function."""
-#     overrides = overrides or {}
-#     for option in reversed(_WOOD_MS_OPTIONS):
-#         over = overrides.get(option.name or option.opts[0].lstrip('-').replace('-', '_'), None)
-#         func = option(**over)(func)
-#     return func
-
-# def OverridableOption(*args, **kwargs) -> OverridableOption:
-#     """Create an OverridableOption and add it to the WOOD_MS_OPTIONS list."""
-#     option = OverridableOption(*args, **kwargs)
-#     _WOOD_MS_OPTIONS.append(option)
-#     return option
 
 def validate_resolution(ctx, param, value):
     """Validate that the resolution is a comma-separated list of three positive integers."""

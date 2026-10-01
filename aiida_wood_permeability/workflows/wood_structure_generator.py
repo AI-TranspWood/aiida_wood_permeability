@@ -94,22 +94,18 @@ class WoodStructureGeneratorWorkChain(BaseSehllJobChain):
         """Prepare the input parameters for the structure generator, applying any overrides from the WC inputs."""
         params = self.inputs.input_params.get_dict()
         overrides = {}
-        # if self.inputs.cellR:
         if 'cellR' in self.inputs and self.inputs.cellR:
             params.pop('cellR', None)
             params.pop('cell_r', None)
             overrides['cell_r'] = self.inputs.cellR
-        # if self.inputs.cell_wall_thickness:
         if 'cell_wall_thickness' in self.inputs and self.inputs.cell_wall_thickness:
             params.pop('cellWallThick', None)
             params.pop('cell_wall_thickness', None)
             overrides['cell_wall_thickness'] = self.inputs.cell_wall_thickness
-        # if self.inputs.resolution:
         if 'resolution' in self.inputs and self.inputs.resolution:
             params.pop('sizeVolume', None)
             params.pop('size_volume', None)
             overrides['size_volume'] = self.inputs.resolution
-        # if self.inputs.random_seed:
         if 'random_seed' in self.inputs and self.inputs.random_seed:
             params.pop('random_seed', None)
             overrides['random_seed'] = self.inputs.random_seed
@@ -124,12 +120,16 @@ class WoodStructureGeneratorWorkChain(BaseSehllJobChain):
             overrides['save_global_dist'] = self.inputs.save_global_dist
 
         self.ctx.save_local_dist = bool(
-            overrides.get('save_local_dist',
-            params.get('save_local_dist', params.get('writeLocalDeformData', False)))
+            overrides.get(
+                'save_local_dist',
+                params.get('save_local_dist', params.get('writeLocalDeformData', False))
+            )
         )
         self.ctx.save_global_dist = bool(
-            overrides.get('save_global_dist',
-            params.get('save_global_dist', params.get('writeGlobalDeformData', False)))
+            overrides.get(
+                'save_global_dist',
+                params.get('save_global_dist', params.get('writeGlobalDeformData', False))
+            )
         )
 
         params.pop('writeLocalDeformData', None)
