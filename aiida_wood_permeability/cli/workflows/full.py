@@ -27,7 +27,7 @@ from ..utils import launch, options
 @options.FLUID_DENSITY()
 @options.KINEMATIC_VISCOSITY()
 @options.TOLERANCE()
-@options.UNIFORM_GUO_ZHAO()
+# @options.UNIFORM_GUO_ZHAO()
 @options.CLEAN_WORKDIR()
 # Resources
 @options.NUM_NODES()
@@ -82,6 +82,8 @@ def launch_workflow(
         value = optional.get(opt_param)
         if value is not None:
             olb_params[param_key] = value
+
+    olb_params['uniformguozhao'] = 1
 
     for param_set in gen_params:
         builder = workchain.get_builder()

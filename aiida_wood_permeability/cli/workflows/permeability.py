@@ -26,7 +26,7 @@ from ..utils import launch, options
 @options.FLUID_DENSITY()
 @options.KINEMATIC_VISCOSITY()
 @options.TOLERANCE()
-@options.UNIFORM_GUO_ZHAO()
+# @options.UNIFORM_GUO_ZHAO()
 @options.ARRAY_NAME(required=False)
 @options.CLEAN_WORKDIR()
 # Resources
@@ -87,6 +87,8 @@ def launch_workflow(
         value = optional.get(opt_param)
         if value is not None:
             params[param_key] = value
+
+    params['uniformguozhao'] = 1
 
     builder.clean_workdir = orm.Bool(clean_workdir)
 

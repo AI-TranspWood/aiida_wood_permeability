@@ -13,7 +13,7 @@ PERMEABILITY_PARAM_MAP = {
     'kinematic_viscosity': 'kinematicViscosity',
     'fluid_density': 'fluidDensity',
     'tolerance': 'tolerance',
-    'uniform_guo_zhao': 'uniformguozhao'
+    # 'uniform_guo_zhao': 'uniformguozhao'
 }
 
 PERMEABILITY_CODE = OverridableOption(
@@ -48,13 +48,16 @@ UPHYS = OverridableOption(
     type=click.FloatRange(min=0.0, min_open=True),
     default=1.0,
     show_default=True,
-    help='The outlet velocity magnitude to use for the permeability calculation. Units: [m/s]'
+    help=(
+        'The outlet velocity magnitude to use for the permeability calculation. Units: [m/s]'
+        '[The fluiid-density, kinematic-viscosity and uphys together should match the experiment\'s Reynolds number]'
+    )
 )
 
 LB_RESOLUTION = OverridableOption(
     '--resolution',
     'resolution',
-    type=click.IntRange(min=1),
+    type=click.IntRange(min=10),
     default=200,
     show_default=True,
     help='The lattice resolution to use for the permeability calculation.'
@@ -82,11 +85,11 @@ WALL_PERMEABILITY = OverridableOption(
     '--wall-permeability',
     'wall_permeability',
     type=click.FLOAT,
-    default=1e-16,
+    default=1e-14,
     show_default=True,
     help=(
         'The physical Darcy permeability assigned to the porous material. Units: [m²]. '
-        'Typical wood values: 1e-18 ... 1e-14 m²'
+        'Typical wood values: 1e-15 ... 1e-12 m²'
     )
 )
 
@@ -96,7 +99,10 @@ KINEMATIC_VISCOSITY = OverridableOption(
     type=click.FLOAT,
     default=1e-4,
     show_default=True,
-    help='The fluid kinematic viscosity to use for the permeability calculation. Units: [m²/s]. Example: 1e-6 for water.'
+    help=(
+        'The fluid kinematic viscosity to use for the permeability calculation. Units: [m²/s]. Example: 1e-6 for water.'
+        '[The fluiid-density, kinematic-viscosity and uphys together should match the experiment\'s Reynolds number]'
+    )
 )
 
 FLUID_DENSITY = OverridableOption(
@@ -105,7 +111,10 @@ FLUID_DENSITY = OverridableOption(
     type=click.FLOAT,
     default=1.0,
     show_default=True,
-    help='The fluid density to use for the permeability calculation. Units: [kg/m³]. Example: 1000 for water.'
+    help=(
+        'The fluid density to use for the permeability calculation. Units: [kg/m³]. Example: 1000 for water. '
+        '[The fluiid-density, kinematic-viscosity and uphys together should match the experiment\'s Reynolds number]'
+    )
 )
 
 TOLERANCE = OverridableOption(
@@ -117,11 +126,11 @@ TOLERANCE = OverridableOption(
     help='The convergence tolerance used during permeability monitoring.'
 )
 
-UNIFORM_GUO_ZHAO = OverridableOption(
-    '--uniform-guo-zhao',
-    'uniform_guo_zhao',
-    type=click.Choice(['0', '1']),
-    default='1',
-    show_default=True,
-    help='The mode for the permeability calculation: 0 = Production mode, 1 = Diagnostic mode.'
-)
+# UNIFORM_GUO_ZHAO = OverridableOption(
+#     '--uniform-guo-zhao',
+#     'uniform_guo_zhao',
+#     type=click.Choice(['0', '1']),
+#     default='1',
+#     show_default=True,
+#     help='The mode for the permeability calculation: 0 = Production mode, 1 = Diagnostic mode.'
+# )
