@@ -18,9 +18,6 @@ from ..utils import launch, options
 # Codes
 @options.WOOD_MS_CODE(required=True)
 @options.PERMEABILITY_CODE(required=True)
-# Either/or params
-@options.WOOD_STRUCTURE_FILE(required=False)
-@options.WOOD_STRUCT_NODE(required=False)
 # Optional parameters,
 @options.ARRAY_NAME(required=False)
 @options.SCALING_FACTOR()
@@ -30,7 +27,7 @@ from ..utils import launch, options
 @options.FLUID_DENSITY()
 @options.KINEMATIC_VISCOSITY()
 @options.TOLERANCE()
-@options.UNIFORM_GUO_ZHAO()
+# @options.UNIFORM_GUO_ZHAO()
 @options.CLEAN_WORKDIR()
 # Resources
 @options.NUM_NODES()
@@ -46,7 +43,6 @@ def launch_workflow(
     # Codes
     wood_ms_code,
     permeability_code,
-    clean_workdir,
     # Resources
     num_nodes,
     num_mpiprocs_per_machine,
@@ -59,9 +55,10 @@ def launch_workflow(
     # inlet_pressure, tau,
     # kinematic_viscosity, fluid_density,
     # tolerance, uniform_guo_zhao,
+    clean_workdir,
     **optional
 ):
-    """Launch the infiltration workflow."""
+    """Generation to permeability workflow for wood structures."""
     from aiida.plugins import WorkflowFactory
 
     workchain = WorkflowFactory('aitw.wood_permeability.wood_permeability')
@@ -85,6 +82,8 @@ def launch_workflow(
         value = optional.get(opt_param)
         if value is not None:
             olb_params[param_key] = value
+
+    olb_params['uniformguozhao'] = 1
 
     for param_set in gen_params:
         builder = workchain.get_builder()

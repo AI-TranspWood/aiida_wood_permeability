@@ -191,15 +191,3 @@ class WoodPermeabilityWorkChain(BaseSehllJobChain):
         self.out_many(
             self.exposed_outputs(workchain, OLBPermeabilityWorkChain, namespace='permeability')
         )
-
-    # def results(self):
-    #     """Collect the results from all phases and output them."""
-    #     results = {
-    #         'generated_structure': self.ctx.generated_structure,
-    #         'filtered_structure': self.ctx.filtered_structure,
-    #         'permeability_results': self.exposed_outputs(
-    #             self.ctx.permeability_workchain, OLBPermeabilityWorkChain, namespace='permeability'
-    #         ),
-    #     }
-
-    #     self.out('results', orm.Dict(dict=results))
